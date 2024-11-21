@@ -37,26 +37,27 @@ const Board = () => {
     }, [actionMenuItem, dispatch])
 
     useEffect(() => {
-        if (!canvasRef.current) return
+        if (!canvasRef.current) return;
         const canvas = canvasRef.current;
-        const context = canvas.getContext('2d')
-
+        const context = canvas.getContext('2d');
+    
         const changeConfig = (color, size) => {
-            context.strokeStyle = color
-            context.lineWidth = size
-        }
-
+            context.strokeStyle = color;
+            context.lineWidth = size;
+        };
+    
         const handleChangeConfig = (config) => {
-            console.log("config", config)
-            changeConfig(config.color, config.size)
-        }
-        changeConfig(color, size)
-        socket.on('changeConfig', handleChangeConfig)
-
+            changeConfig(config.color, config.size);
+        };
+    
+        changeConfig(color, size);
+        socket.on('changeConfig', handleChangeConfig);
+    
         return () => {
-            socket.off('changeConfig', handleChangeConfig)
-        }
-    }, [color, size])
+            socket.off('changeConfig', handleChangeConfig);
+        };
+    }, [color, size]);
+    
 
     // before browser pain
     useLayoutEffect(() => {
